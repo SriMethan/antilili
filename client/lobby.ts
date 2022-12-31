@@ -84,7 +84,7 @@ export class LobbyController implements IChatController {
         patch(document.getElementById('seekbuttons') as HTMLElement, h('div#seekbuttons', this.renderSeekButtons()));
         patch(document.getElementById('lobbychat') as HTMLElement, chatView(this, "lobbychat"));
 
-        patch(document.getElementById('variants-catalog') as HTMLElement, variantPanels(this));
+        //patch(document.getElementById('variants-catalog') as HTMLElement, variantPanels(this));
 
         this.streams = document.getElementById('streams') as HTMLElement;
 
@@ -861,7 +861,7 @@ export function lobbyView(model: PyChessModel): VNode[] {
                 h('div#seeks-wrapper', h('table#seeks', { hook: { insert: vnode => runSeeks(vnode, model) } })),
             ]),
         ]),
-        h('div#variants-catalog'),
+        //h('div#variants-catalog'),
         h('aside.sidebar-second', [ h('div#seekbuttons') ]),
         h('under-left', [
             h('a.reflist', { attrs: { href: 'https://discord.gg/5qvjPQstKS' } }, 'Discord'),
@@ -881,22 +881,7 @@ export function lobbyView(model: PyChessModel): VNode[] {
                     ]),
                     h('time', '2022.09.05'),
                 ]), 
-                h('a.post', { attrs: {href: '/news/zakirwins'} }, [
-                    h('img', { attrs: {src: model["assetURL"] + '/images/zakirwins.png'} }),
-                    h('span.text', [
-                        h('strong', "AGM Zakir Hasanov wins Antichess960 Shield Arena"),
-                        h('span', 'Antichess Grand Master wins Antichess960 Shield Arena for their very first time.'),
-                    ]),
-                    h('time', '2022.09.05'),
-                ]),                
-                h('a.post', { attrs: {href: '/news/nmwins'} }, [
-                    h('img', { attrs: {src: model["assetURL"] + '/images/nmwins.png'} }),
-                    h('span.text', [
-                        h('strong', "National Master wins Losers Shield Arena (For The First Time Ever)!"),
-                        h('span', 'National Master wins Losers Shield Arena (For The First Time Ever)!'),
-                    ]),
-                    h('time', '2022.08.17'),
-                ]),
+
             ]),
         ]),
         h('under-right', [
