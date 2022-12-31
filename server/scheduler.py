@@ -169,7 +169,7 @@ def new_scheduled_tournaments(already_scheduled, now=None):
                 name = "%s Shield Arena" % variant_name
             elif plan.freq == MONTHLY:
                 if plan.variant in COFFEEDAY:
-                    name = "Coffeeday %s Arena" % variant_name
+                    name = "Coffee-day %s Arena" % variant_name
                 else:
                     name = "Monthly %s Arena" % variant_name
             elif plan.freq == WEEKLY:

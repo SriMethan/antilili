@@ -68,7 +68,7 @@ from scheduler import (
     MONTHLY_VARIANTS,
     WEEKLY_VARIANTS,
     NO_MORE_VARIANTS,
-    Coffeeday,
+    #Coffeeday,
     SHIELDS,
 )
 from videos import VIDEOS
