@@ -251,10 +251,10 @@ async def init_state(app):
         translation.install()
 
         for variant in VARIANTS:
-            if variant in MONTHLY_VARIANTS or variant in Coffee-day or variant in NO_MORE_VARIANTS:
+            if variant in MONTHLY_VARIANTS or variant in NO_MORE_VARIANTS:
                 tname = translated_tournament_name(variant, MONTHLY, ARENA, translation)
                 app["tourneynames"][lang][(variant, MONTHLY, ARENA)] = tname
-            if variant in Coffee-day or variant in WEEKLY_VARIANTS:
+            if variant in WEEKLY_VARIANTS:
                 tname = translated_tournament_name(variant, WEEKLY, ARENA, translation)
                 app["tourneynames"][lang][(variant, WEEKLY, ARENA)] = tname
             if variant in SHIELDS:
