@@ -10,7 +10,7 @@ export function aboutView(model: PyChessModel): VNode[] {
     ]
     return [
         h('div.about', [
-            h('img.center', { attrs: { src: `${model["asset-url"]}/favicon/favicon.png` } }),
+            h('img.center', { attrs: { src: `${model.assetURL}/favicon/favicon.png` } }),
             h('h1', { attrs: { align: 'center' } }, _('About Liantichess')),
             h('p', _('Liantichess is a free, open-source antichess server designed to play several antichess variants, derived from pychess.')),
             h('p', [

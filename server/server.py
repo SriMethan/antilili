@@ -68,7 +68,7 @@ from scheduler import (
     MONTHLY_VARIANTS,
     WEEKLY_VARIANTS,
     NO_MORE_VARIANTS,
-    #SEATURDAY,
+    Coffee-day,
     SHIELDS,
 )
 from videos import VIDEOS
@@ -251,12 +251,12 @@ async def init_state(app):
         translation.install()
 
         for variant in VARIANTS:
-            #if variant in MONTHLY_VARIANTS or variant in SEATURDAY or variant in NO_MORE_VARIANTS:
-                #tname = translated_tournament_name(variant, MONTHLY, ARENA, translation)
-                #app["tourneynames"][lang][(variant, MONTHLY, ARENA)] = tname
-            #if variant in SEATURDAY or variant in WEEKLY_VARIANTS:
-                #tname = translated_tournament_name(variant, WEEKLY, ARENA, translation)
-                #app["tourneynames"][lang][(variant, WEEKLY, ARENA)] = tname
+            if variant in MONTHLY_VARIANTS or variant in Coffee-day or variant in NO_MORE_VARIANTS:
+                tname = translated_tournament_name(variant, MONTHLY, ARENA, translation)
+                app["tourneynames"][lang][(variant, MONTHLY, ARENA)] = tname
+            if variant in Coffee-day or variant in WEEKLY_VARIANTS:
+                tname = translated_tournament_name(variant, WEEKLY, ARENA, translation)
+                app["tourneynames"][lang][(variant, WEEKLY, ARENA)] = tname
             if variant in SHIELDS:
                 tname = translated_tournament_name(variant, SHIELD, ARENA, translation)
                 app["tourneynames"][lang][(variant, SHIELD, ARENA)] = tname
@@ -304,11 +304,9 @@ async def init_state(app):
             ):
                 await load_tournament(app, doc["_id"])
 
-        # TODO: Enable on prod pychess when time comes
-        if DEV:
-            already_scheduled = await get_scheduled_tournaments(app)
-            new_tournaments_data = new_scheduled_tournaments(already_scheduled)
-            await create_scheduled_tournaments(app, new_tournaments_data)
+        already_scheduled = await get_scheduled_tournaments(app)
+        new_tournaments_data = new_scheduled_tournaments(already_scheduled)
+        await create_scheduled_tournaments(app, new_tournaments_data)
 
         asyncio.create_task(generate_shield(app))
 
