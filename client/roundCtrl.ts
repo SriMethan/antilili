@@ -280,6 +280,9 @@ export class RoundController extends GameController {
         const container = document.getElementById('game-controls') as HTMLElement;
         if (!this.spectator) {
             let buttons = [];
+            if (this.variant.rules.duck) {
+                buttons.push(h('div#undo'));
+            }
             if (!this.tournamentGame) {
                 buttons.push(h('button#abort', { on: { click: () => this.abort() }, props: {title: _('Abort')} }, [h('i', {class: {"icon": true, "icon-abort": true} } ), ]));
             }
@@ -368,6 +371,11 @@ export class RoundController extends GameController {
 
         const container = document.getElementById(`berserk${clockIdx}`) as HTMLElement;
         patch(container, h(`div#berserk${clockIdx}.berserked`, [h('button.icon.icon-berserk')]));
+    }
+
+    private undo = () => {
+        // console.log("Undo");
+        this.goPly(this.ply);
     }
 
     private abort = () => {
@@ -707,7 +715,7 @@ export class RoundController extends GameController {
 
         const lastMove = uci2LastMove(msg.lastMove);
         const step = this.steps[this.steps.length - 1];
-        const capture = !!lastMove && ((this.chessground.state.boardState.pieces.get(lastMove[1]) && step.san?.slice(0, 2) !== 'O-') || (step.san?.slice(1, 2) === 'x'));
+        const capture = !!lastMove && ((this.chessground.state.boardState.pieces.get(lastMove[1] as cg.Key) && step.san?.slice(0, 2) !== 'O-') || (step.san?.slice(1, 2) === 'x'));
 
         if (lastMove && (this.turnColor === this.mycolor || this.spectator)) {
             if (!this.finishedGame) sound.moveSound(this.variant, capture);

@@ -1,8 +1,10 @@
+import { h } from 'snabbdom';
 import * as cg from 'chessgroundx/types';
 
-import { uci2cg, UCIMove } from '@/chess';
 import { GameController } from '@/gameCtrl';
 import { ExtraInput } from './input';
+import { patch } from '@/document';
+import { _ } from '@/i18n';
 
 export class DuckInput extends ExtraInput {
     inputState?: 'click' | 'move';
@@ -12,6 +14,7 @@ export class DuckInput extends ExtraInput {
         super(ctrl);
         this.type = 'duck';
         this.inputState = undefined;
+        this.duckDests = [];
     }
 
     start(piece: cg.Piece, orig: cg.Orig, dest: cg.Key, meta: cg.MoveMetadata): void {
@@ -22,13 +25,12 @@ export class DuckInput extends ExtraInput {
             return;
         }
 
-        this.duckDests = (this.ctrl.ffishBoard.legalMoves().split(" ") as UCIMove[]).
+        this.duckDests = this.ctrl.legalMoves().
             filter(move => move.includes(orig + dest)).
-            map(uci2cg).
             map(move => move.slice(-2)) as cg.Key[];
 
-        const pieces = this.ctrl.chessground.state.boardState.pieces
         let duckKey: cg.Key | undefined;
+        const pieces = this.ctrl.chessground.state.boardState.pieces
         for (const [k, p] of pieces) {
             if (p.role === '_-piece') {
                 duckKey = k;
@@ -43,7 +45,14 @@ export class DuckInput extends ExtraInput {
             return;
         }
 
-        if (duckKey === undefined) {
+        const undo = document.getElementById('undo') as HTMLElement;
+        if (undo.tagName === 'DIV') {
+            patch(undo,
+                h('button#undo', { on: { click: () => this.ctrl.undo() }, props: {title: _('Undo')} }, [h('i', {class: {"icon": true, "icon-reply": true } } ), ])
+            );
+        }
+
+        if (!duckKey) {
             this.inputState = 'click';
         } else {
             // Change the duck's color so that it became movable by the player
@@ -60,6 +69,7 @@ export class DuckInput extends ExtraInput {
 
     finish(key: cg.Key): void {
         if (this.duckDests.includes(key) && this.data) {
+            this.ctrl.chessground.state.lastMove = [this.data.orig, this.data.dest, key];
             this.next(',' + this.data.dest + key);
             this.inputState = undefined;
             this.data = undefined;
