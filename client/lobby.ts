@@ -85,7 +85,7 @@ export class LobbyController implements ChatController {
         patch(document.getElementById('seekbuttons') as HTMLElement, h('div#seekbuttons', this.renderSeekButtons()));
         patch(document.getElementById('lobbychat') as HTMLElement, chatView(this, "lobbychat"));
 
-        //patch(document.getElementById('variants-catalog') as HTMLElement, variantPanels(this));
+        patch(document.getElementById('variants-catalog') as HTMLElement, variantPanels(this));
 
         this.streams = document.getElementById('streams') as HTMLElement;
 
@@ -862,7 +862,7 @@ export function lobbyView(model: PyChessModel): VNode[] {
                 h('div#seeks-wrapper', h('table#seeks', { hook: { insert: vnode => runSeeks(vnode, model) } })),
             ]),
         ]),
-        //h('div#variants-catalog'),
+        h('div#variants-catalog'),
         h('aside.sidebar-second', [ h('div#seekbuttons') ]),
         h('under-left', [
             h('a.reflist', { attrs: { href: 'https://discord.gg/5qvjPQstKS' } }, 'Discord'),
@@ -881,6 +881,24 @@ export function lobbyView(model: PyChessModel): VNode[] {
                         h('span', 'We need Losers Chess & Losers Chess 960 Players!'),
                     ]),
                     h('time', '2022.09.05'),
+                ]), 
+
+                h('a.post', { attrs: {href: '/news/fools'} }, [
+                    h('img', { attrs: {src: model["assetURL"] + '/images/fools.jpg'} }),
+                    h('span.text', [
+                        h('strong', "[April Fools] Liantichess's database is running out"),
+                        h('span', 'Liantichess Mongodb database has running out of space, It will delete all your games, and all the user accounts.'),
+                    ]),
+                    h('time', '2022.04.01'),
+                ]), 
+                
+                h('a.post', { attrs: {href: '/news/variants'} }, [
+                    h('img', { attrs: {src: model["assetURL"] + '/images/variants.png'} }),
+                    h('span.text', [
+                        h('strong', "How to play the variants on liantichess?"),
+                        h('span', 'antichess opening strategies does not work in the antichess variants'),
+                    ]),
+                    h('time', '2022.03.11'),
                 ]), 
 
             ]),

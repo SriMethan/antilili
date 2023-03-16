@@ -6,11 +6,7 @@ import { patch } from '../document';
 import { Variant, VARIANTS } from '../variants';
 import { variantBoard } from './util';
 import { layer2chess } from './layer2chess';
-import { layer2fairy } from './layer2fairy';
-import { layer2army } from './layer2army';
-import { layer2makruk } from './layer2makruk';
-import { layer2shogi } from './layer2shogi';
-import { layer2xiangqi } from './layer2xiangqi';
+
 
 export function layer3variant (container2Id: string, lobbyCtrl: LobbyController, variantName: string, chess960: boolean): void {
     const variant: Variant = VARIANTS[variantName];
@@ -20,15 +16,6 @@ export function layer3variant (container2Id: string, lobbyCtrl: LobbyController,
     case 'layer2chesscont':
         leve2func = layer2chess; container3Id = 'chessl3cont'; break;
     case 'layer2fairycont':
-        leve2func = layer2fairy; container3Id = 'fairyl3cont';  break;
-    case 'layer2armycont':
-        leve2func = layer2army; container3Id = 'armyl3cont';  break;
-    case 'layer2makrukcont':
-        leve2func = layer2makruk; container3Id = 'makrukl3cont';  break;
-    case 'layer2shogicont':
-        leve2func = layer2shogi; container3Id = 'shogil3cont';  break;
-    case 'layer2xiangqicont':
-        leve2func = layer2xiangqi; container3Id = 'xiangqil3cont';  break;
     }
 
     const layer3cont = h(`div#${container3Id}.layer-3-container.chess-l3` , [

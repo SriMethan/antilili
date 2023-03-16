@@ -9,7 +9,7 @@
 }
 @media (max-width: 799px) and (orientation: portrait) {
     .lobby {
-        grid-template-areas: 'table' 'app' 'blog' 'side' 'uleft' 'utable' 'vpanel';
+        grid-template-areas: 'table' 'app' 'vpanel' 'side' 'uleft' 'utable' 'blog';
     }
 
     .sidebar-second {
@@ -23,7 +23,7 @@
     .lobby {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: fit-content(0) minmax(375px, max-content) fit-content(0);
-        grid-template-areas: 'side app app table' 'side blog blog table' 'uleft vpanel vpanel utable';
+        grid-template-areas: 'side app app table' 'side vpanel vpanel table' 'uleft blog blog utable';
     }
 }
 .seeks {
@@ -54,10 +54,9 @@
 }
 
 /* VARIANT INFO PANEL  */
-/* 
+
 .generic-fairy p img {
     height: 15px;
     width: auto;
     filter: saturate(0.1);
 }
-*/
