@@ -68,7 +68,7 @@ from scheduler import (
     MONTHLY_VARIANTS,
     WEEKLY_VARIANTS,
     PAUSED_MONTHLY_VARIANTS,
-    SEATURDAY,
+    #SEATURDAY,
     SHIELDS,
 )
 from videos import VIDEOS
@@ -253,12 +253,12 @@ async def init_state(app):
         for variant in VARIANTS:
             if (
                 variant in MONTHLY_VARIANTS
-                or variant in SEATURDAY
+                #or variant in SEATURDAY
                 or variant in PAUSED_MONTHLY_VARIANTS
             ):
                 tname = translated_tournament_name(variant, MONTHLY, ARENA, translation)
                 app["tourneynames"][lang][(variant, MONTHLY, ARENA)] = tname
-            if variant in SEATURDAY or variant in WEEKLY_VARIANTS:
+            if variant in WEEKLY_VARIANTS:
                 tname = translated_tournament_name(variant, WEEKLY, ARENA, translation)
                 app["tourneynames"][lang][(variant, WEEKLY, ARENA)] = tname
             if variant in SHIELDS:
@@ -308,9 +308,11 @@ async def init_state(app):
             ):
                 await load_tournament(app, doc["_id"])
 
-        already_scheduled = await get_scheduled_tournaments(app)
-        new_tournaments_data = new_scheduled_tournaments(already_scheduled)
-        await create_scheduled_tournaments(app, new_tournaments_data)
+        # TODO: Enable on prod pychess when time comes
+        if DEV:
+            already_scheduled = await get_scheduled_tournaments(app)
+            new_tournaments_data = new_scheduled_tournaments(already_scheduled)
+            await create_scheduled_tournaments(app, new_tournaments_data)
 
         asyncio.create_task(generate_shield(app))
 

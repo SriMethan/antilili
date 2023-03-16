@@ -19,37 +19,10 @@ from tournaments import new_tournament
 MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY = range(7)
 Plan = namedtuple("Plan", "freq, date, hour, variant, is960, base, inc, byo, duration")
 
-SHIELDS = ["crazyhouse960", "atomic960", "makruk", "shinobi"]
-SEATURDAY = ["makruk", "makpong", "sittuyin", "cambodian", "asean"]
+SHIELDS = []
+SEATURDAY = []
 
 MONTHLY_VARIANTS = (
-    "dobutsu",
-    "capahouse",
-    "chak",
-    "shogun",
-    "orda",
-    "gorogoroplus",
-    "shouse",
-    "capablanca960",
-    "hoppelpoppel",
-    "grand",
-    "janggi",
-    "seirawan",
-    "empire",
-    "kyotoshogi",
-    "placement",
-    "ordamirror",
-    "capahouse960",
-    "minixiangqi",
-    "synochess",
-    "grandhouse",
-    "shako",
-    "torishogi",
-    "seirawan960",
-    "chennis",
-    "capablanca",
-    "xiangqi",
-    "shinobi",
 )
 
 # Old MONTHLY tournaments, needed to create translated tourney names
@@ -57,9 +30,6 @@ PAUSED_MONTHLY_VARIANTS = ("manchu", "duck")
 
 # Old WEEKLY tournaments, paused atm., but needed to create translated tourney names
 WEEKLY_VARIANTS = (
-    "crazyhouse960",
-    "atomic960",
-    "duck",
 )
 
 # Monthly Variant Tournaments need different TC
@@ -143,17 +113,6 @@ class Scheduler:
 
         plans += [
             Plan(SHIELD, self.second_monthly(MONDAY), 18, "crazyhouse", True, 3, 2, 0, 180),  # 960
-            # Plan(SHIELD, self.second_monthly(THURSDAY), 18, "shinobi", False, 3, 4, 0, 180),
-            Plan(SHIELD, self.second_monthly(SATURDAY), 12, "makruk", False, 5, 3, 0, 180),
-            Plan(SHIELD, self.third_monthly(SUNDAY), 12, "atomic", True, 3, 2, 0, 180),  # 960
-            Plan(MONTHLY, self.first_monthly(SATURDAY), 12, "asean", False, 3, 2, 0, 90),
-            # The second Saturday is Makruk Shield
-            Plan(MONTHLY, self.third_monthly(SATURDAY), 12, SEA, False, 3, 2, 0, 90),
-            Plan(MONTHLY, self.fourth_monthly(SATURDAY), 12, "makpong", False, 3, 2, 0, 90),
-            # Plan(WEEKLY, self.next_day_of_week(FRIDAY), 18, "crazyhouse", True, 3, 0, 0, 60),  # 960
-            # Plan(WEEKLY, self.next_day_of_week(TUESDAY), 18, "atomic", True, 3, 0, 0, 60),  # 960
-            Plan(WEEKLY, self.next_day_of_week(THURSDAY), 14, "makruk", False, 3, 2, 0, 90),
-            Plan(WEEKLY, self.next_day_of_week(SUNDAY), 18, "duck", False, 3, 5, 0, 90),
         ]
 
         return plans

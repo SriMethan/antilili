@@ -567,10 +567,6 @@ a.news {
   margin-right: 0.4em;
 }
 posts {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  grid-gap: 0 2%;
-  grid-template-rows: auto;
   font-size: 0.9em;
   line-height: 1.5;
 }
@@ -587,7 +583,7 @@ a.post img {
   max-width: none;
   width: 100%;
   height: auto;
-  max-height: 125px;
+  max-height: 125cm;
   border-radius: 3px;
   object-fit: cover;
 }
@@ -1328,7 +1324,7 @@ table#seeks {
 #seeks-table {
   box-shadow: var(--base-shadow);
   background-position: center;
-  background-image: url('images/seek-bg.svg');
+  background-image: url('images/favicon.png');
   background-color: var(--bg-seek);
   background-blend-mode: overlay;
   background-size: 100% 100%;

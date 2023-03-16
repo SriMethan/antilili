@@ -9,6 +9,26 @@ https://lichess.org/blog/Wqa7GiAAAOIpBLoY/developer-update-275-improved-game-com
 
 # Create mappings to compress variant, result and uci/usi move lists a little
 V2C = {
+    "antipawns": "c",
+    "antihouse": "i",
+    "antiplacement": "Q",
+    "antishogun": "Z",
+    "anticapablanca": "n",
+    "antichak": "U",
+    "antigrandhouse": "W",
+    "atomic_giveaway_hill": "h",
+    "coffeehill": "A",
+    "coffeehouse": "L",
+    "antiatomic": "F",
+    "antihoppelpoppel": "Y",
+    "antichess": "f",
+    "losers": "H",
+    "antiminishogi": "R",
+    "coffee_3check": "X",
+    "coffeerace": "N",   
+    "anti_antichess": "V",
+#    "orda": "f",
+    "antisynochess": "v",
     "chess": "n",
     "capablanca": "c",
     "capahouse": "i",
@@ -47,7 +67,7 @@ V2C = {
     "asean": "S",
     "chak": "C",
     "chennis": "H",
-    "duck": "U",
+    "duck": "U",    
 }
 C2V = {v: k for k, v in V2C.items()}
 
